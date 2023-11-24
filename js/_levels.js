@@ -348,7 +348,7 @@ const levels = [
   spinPortal()
   $portal.fadeOut(3500)
   $popBtn.show()
-  setTimeout(() => {popup("none", "none", "Monarch Valley", "Wow this place is fantastic! I better be careful while I explore. There could be monsters hiding anywhere. Master Wynn said I need to find five infused spheres. I think the scrodents hide them in their dens.", 'I can use the arrow keys to move.','none', 'none', 'Continue')}, 4000)
+  setTimeout(() => {popup("none", "none", "Monarch Valley", "Wow this place is fantastic! I better be careful while I explore. There could be monsters hiding anywhere. Master Wynn said I need to find five infused spheres. I think the scrodents hide them in their dens. I can use the arrow keys to move.", 'none','none', 'none', 'Continue')}, 4000)
     $popBtn.off().click(() => {
     $popContent.text("A good soldier will always maintain his arms, his equipment, and himself. I should check my inventory and status before I get too far.")
     teachBtns()
