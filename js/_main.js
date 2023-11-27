@@ -287,6 +287,35 @@ function moveRight() {
   }
 }
 
+// Function to handle movement based on touch events
+function handleTouchMove(event) {
+  event.preventDefault(); // Prevent default touch behavior
+
+  const touchX = event.touches[0].clientX;
+  const touchY = event.touches[0].clientY;
+
+  // Determine the direction based on touch coordinates
+  const playerPosX = player.x * 50;
+  const playerPosY = player.y * 50;
+
+  if (touchY > playerPosY) {
+    moveDown(); // Simulate moving down
+  } else if (touchY < playerPosY) {
+    moveUp(); // Simulate moving up
+  }
+
+  if (touchX > playerPosX) {
+    moveRight(); // Simulate moving right
+  } else if (touchX < playerPosX) {
+    moveLeft(); // Simulate moving left
+  }
+}
+
+// Event listeners for touch events
+document.addEventListener('touchstart', handleTouchMove);
+document.addEventListener('touchmove', handleTouchMove);
+
+
 function centerPlayer() {
   const left = player.x * 50;
   const top = player.y * 50;
