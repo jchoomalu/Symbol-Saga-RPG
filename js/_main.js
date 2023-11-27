@@ -297,39 +297,37 @@ function handleTouchStart(event) {
 }
 
 // Function to handle touch end
-function handleTouchEnd(event) {
-  if (touchStartX === null || touchStartY === null) {
-    return; // No touch start detected
+// Function to handle touch move
+function handleTouchMove(event) {
+  event.preventDefault(); // Prevent default touch behavior
+
+  const touchX = event.touches[0].clientX;
+  const touchY = event.touches[0].clientY;
+
+  const playerPosX = player.x * 50 + 25; // Player's center X position
+  const playerPosY = player.y * 50 + 25; // Player's center Y position
+
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
+
+  const horizontalZone = screenWidth / 3; // Divide the screen horizontally into 3 zones
+  const verticalZone = screenHeight / 3; // Divide the screen vertically into 3 zones
+
+  if (touchY < playerPosY - verticalZone) {
+    moveUp(); // Touch in the top zone, move up
+  } else if (touchY > playerPosY + verticalZone) {
+    moveDown(); // Touch in the bottom zone, move down
   }
 
-  const touchEndX = event.changedTouches[0].clientX;
-  const touchEndY = event.changedTouches[0].clientY;
-
-  const deltaX = touchEndX - touchStartX;
-  const deltaY = touchEndY - touchStartY;
-
-  if (Math.abs(deltaX) > Math.abs(deltaY)) {
-    if (deltaX > 0) {
-      moveRight();
-    } else {
-      moveLeft();
-    }
-  } else {
-    if (deltaY > 0) {
-      moveDown();
-    } else {
-      moveUp();
-    }
+  if (touchX < playerPosX - horizontalZone) {
+    moveLeft(); // Touch in the left zone, move left
+  } else if (touchX > playerPosX + horizontalZone) {
+    moveRight(); // Touch in the right zone, move right
   }
-
-  // Reset touch start positions
-  touchStartX = null;
-  touchStartY = null;
 }
 
-// Event listeners for touch events
-document.addEventListener('touchstart', handleTouchStart);
-document.addEventListener('touchend', handleTouchEnd);
+// Event listener for touch move
+document.addEventListener('touchmove', handleTouchMove);
 
 
 function centerPlayer() {
