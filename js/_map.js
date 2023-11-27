@@ -1,5 +1,9 @@
 $(() => {
 
+    $(document).ready(function(){
+        $('#myModal').modal('show');
+      });
+
     class ArrayConverter {
         constructor(width, height, content = (x, y) => undefined) {
             this.mapX = width;
