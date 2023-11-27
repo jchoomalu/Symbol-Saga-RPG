@@ -287,33 +287,49 @@ function moveRight() {
   }
 }
 
-// Function to handle movement based on touch events
-function handleTouchMove(event) {
-  event.preventDefault(); // Prevent default touch behavior
+let touchStartX = null;
+let touchStartY = null;
 
-  const touchX = event.touches[0].clientX;
-  const touchY = event.touches[0].clientY;
+// Function to handle touch start
+function handleTouchStart(event) {
+  touchStartX = event.touches[0].clientX;
+  touchStartY = event.touches[0].clientY;
+}
 
-  // Determine the direction based on touch coordinates
-  const playerPosX = player.x * 50;
-  const playerPosY = player.y * 50;
-
-  if (touchY > playerPosY) {
-    moveDown(); // Simulate moving down
-  } else if (touchY < playerPosY) {
-    moveUp(); // Simulate moving up
+// Function to handle touch end
+function handleTouchEnd(event) {
+  if (touchStartX === null || touchStartY === null) {
+    return; // No touch start detected
   }
 
-  if (touchX > playerPosX) {
-    moveRight(); // Simulate moving right
-  } else if (touchX < playerPosX) {
-    moveLeft(); // Simulate moving left
+  const touchEndX = event.changedTouches[0].clientX;
+  const touchEndY = event.changedTouches[0].clientY;
+
+  const deltaX = touchEndX - touchStartX;
+  const deltaY = touchEndY - touchStartY;
+
+  if (Math.abs(deltaX) > Math.abs(deltaY)) {
+    if (deltaX > 0) {
+      moveRight();
+    } else {
+      moveLeft();
+    }
+  } else {
+    if (deltaY > 0) {
+      moveDown();
+    } else {
+      moveUp();
+    }
   }
+
+  // Reset touch start positions
+  touchStartX = null;
+  touchStartY = null;
 }
 
 // Event listeners for touch events
-document.addEventListener('touchstart', handleTouchMove);
-document.addEventListener('touchmove', handleTouchMove);
+document.addEventListener('touchstart', handleTouchStart);
+document.addEventListener('touchend', handleTouchEnd);
 
 
 function centerPlayer() {
