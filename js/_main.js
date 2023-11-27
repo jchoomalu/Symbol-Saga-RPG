@@ -287,49 +287,6 @@ function moveRight() {
   }
 }
 
-let touchStartX = null;
-let touchStartY = null;
-
-// Function to handle touch start
-function handleTouchStart(event) {
-  touchStartX = event.touches[0].clientX;
-  touchStartY = event.touches[0].clientY;
-}
-
-// Function to handle touch end
-// Function to handle touch move
-function handleTouchMove(event) {
-  event.preventDefault(); // Prevent default touch behavior
-
-  const touchX = event.touches[0].clientX;
-  const touchY = event.touches[0].clientY;
-
-  const playerPosX = player.x * 50 + 25; // Player's center X position
-  const playerPosY = player.y * 50 + 25; // Player's center Y position
-
-  const screenWidth = window.innerWidth;
-  const screenHeight = window.innerHeight;
-
-  const horizontalZone = screenWidth / 3; // Divide the screen horizontally into 3 zones
-  const verticalZone = screenHeight / 3; // Divide the screen vertically into 3 zones
-
-  if (touchY < playerPosY - verticalZone) {
-    moveUp(); // Touch in the top zone, move up
-  } else if (touchY > playerPosY + verticalZone) {
-    moveDown(); // Touch in the bottom zone, move down
-  }
-
-  if (touchX < playerPosX - horizontalZone) {
-    moveLeft(); // Touch in the left zone, move left
-  } else if (touchX > playerPosX + horizontalZone) {
-    moveRight(); // Touch in the right zone, move right
-  }
-}
-
-// Event listener for touch move
-document.addEventListener('touchmove', handleTouchMove);
-
-
 function centerPlayer() {
   const left = player.x * 50;
   const top = player.y * 50;
