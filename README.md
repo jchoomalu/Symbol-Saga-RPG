@@ -11,3 +11,7 @@ concepts in mind. It is built entirely on the front end with
 HTML, CSS, JavaScript and jQuery. I relied on Bootstrap 5 for
 responsiveness, Semantic UI for consistent stlying and animeJS
 for battle animations.
+
+### Map Editor
+
+In collaboration with Sebastian Oliveres Coster
